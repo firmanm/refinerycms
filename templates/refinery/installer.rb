@@ -6,7 +6,9 @@ MINOR_VERSION_BAND = '3.0.0'
 begin
   require 'execjs'
 rescue LoadError
-  abort "ExecJS is not installed. Please re-start the installer after running:\ngem install execjs"
+  abort <<-ERROR
+\033[31m[ABORTING]\033[0m ExecJS is not installed. Please re-start the installer after running:\ngem install execjs
+ERROR
 end
 
 if File.read("#{destination_root}/Gemfile") !~ /assets.+coffee-rails/m
@@ -19,7 +21,7 @@ append_file 'Gemfile', <<-GEMFILE
 gem 'refinerycms', '~> #{VERSION_BAND}'
 
 # Optionally, specify additional Refinery CMS Extensions here:
-gem 'refinerycms-acts-as-indexed', ['~> 2.0', '>= 2.0.1']
+gem 'refinerycms-acts-as-indexed', ['~> 3.0', '>= 3.0.0']
 gem 'refinerycms-wymeditor', ['~> 1.0', '>= 1.0.6']
 gem 'refinerycms-authentication-devise', '~> 1.0'
 #  gem 'refinerycms-blog', ['~> #{VERSION_BAND}', '>= #{MINOR_VERSION_BAND}']
